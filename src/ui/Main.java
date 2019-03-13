@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -41,7 +42,9 @@ public class Main extends Application {
     private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
     public static final int ENTER_WEIGHT_BUTTON_HEIGHT = 34;
     public static final int SET_WEIGHT_GOAL_TEXTFIELD_WIDTH = 70;
-
+    public static final String ERROR_MESSAGE = "Please enter a valid number";
+    public static final Font SUMMARY_LABEL_HEADING_FONT = new Font("Arial", 20);
+    public static final Font SUMMARY_LABEL_VALUE_FONT = new Font("Arial", 15);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -73,6 +76,9 @@ public class Main extends Application {
         BorderPane tab1BorderPane = new BorderPane();
         tab1BorderPane.setLeft(tableView);
 
+        Label errorMessage = new Label();
+        errorMessage.setFont(new Font("Arial italic", 14));
+
         Label setWeightGoalHeading = new Label("GOAL");
         Label setWeightGoalValue = new Label(weightGoal);
 
@@ -88,12 +94,13 @@ public class Main extends Application {
         setWeightGoalButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                errorMessage.setText("");
                 try {
                     Double.parseDouble(setWeightGoalTextField.getText());
                     weightGoal = setWeightGoalTextField.getText();
                     setWeightGoalValue.setText(weightGoal + " lbs");
                 } catch (Exception e) {
-                    System.out.println("BAD SET GOAL WEIGHT INPUT");
+                    errorMessage.setText(ERROR_MESSAGE);
                 }
             }
         });
@@ -101,12 +108,11 @@ public class Main extends Application {
         HBox setWeightGoalHBox = new HBox(setWeightGoalButton, setWeightGoalTextField);
         setWeightGoalHBox.setAlignment(Pos.CENTER);
 
-
-
-        VBox setWeightGoalVBox = new VBox(setWeightGoalHeading, setWeightGoalValue, setWeightGoalHBox);
+        VBox setWeightGoalVBox = new VBox(setWeightGoalHeading, setWeightGoalValue, setWeightGoalHBox, errorMessage);
         setWeightGoalVBox.setAlignment(Pos.TOP_CENTER);
         setWeightGoalVBox.setMargin(setWeightGoalHeading, new Insets(25, 0, 0, 0));
         setWeightGoalVBox.setMargin(setWeightGoalValue, new Insets(5, 0, 30, 0));
+        setWeightGoalVBox.setMargin(errorMessage, new Insets(70, 0, 0, 0));
 
         tab1BorderPane.setCenter(setWeightGoalVBox);
 
@@ -121,6 +127,7 @@ public class Main extends Application {
         enterWeightButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                errorMessage.setText("");
                 int i = 0;
                 while (weightRecords.get(i).getWeight() != "" && i < NUMBER_OF_MONTHS_IN_YEAR - 1) {
                     i++;
@@ -129,10 +136,9 @@ public class Main extends Application {
                     try {
                         Double.parseDouble(enterWeightTextField.getText());
                     } catch (Exception e) {
-                        System.out.println("EXCEPTION THROWN!!!");
+                        errorMessage.setText(ERROR_MESSAGE);
                         return;
                     }
-
                     weightRecords.set(i, new WeightRecord(Integer.toString(i + 1), enterWeightTextField.getText()));
                 }
             }
@@ -159,10 +165,50 @@ public class Main extends Application {
         enterWeightHBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
         tab1BorderPane.setBottom(enterWeightHBox);
 
+        // ****************************************************************************************************
+
+
+        Label startHeading = new Label("Start");
+        startHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+
+        Label currentHeading = new Label("Current");
+        currentHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+
+        Label goalHeading =  new Label("Goal");
+        goalHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        Label startValue = new Label("250 lbs");
+        startValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+
+
+        Label currentValue = new Label("200 lbs");
+        currentValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+
+        Label goalValue = new Label("150 lbs");
+        goalValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+
+        GridPane summaryGridPane = new GridPane();
+        summaryGridPane.setAlignment(Pos.TOP_CENTER);
+        summaryGridPane.setHgap(20);
+        summaryGridPane.setVgap(20);
+        summaryGridPane.setPadding(new Insets(30, 30, 30, 30));
+
+        summaryGridPane.add(startHeading, 0, 0);
+        summaryGridPane.add(startValue, 0, 1);
+
+        summaryGridPane.add(currentHeading, 1, 0);
+        summaryGridPane.add(currentValue, 1, 1);
+
+        summaryGridPane.add(goalHeading, 2, 0);
+        summaryGridPane.add(goalValue, 2, 1);
+
+
+        // ****************************************************************************************************
+
+
         Tab tab1 = new Tab(TAB_1_NAME, tab1BorderPane);
         tab1.setClosable(false);
 
-        Tab tab2 = new Tab(TAB_2_NAME);
+        Tab tab2 = new Tab(TAB_2_NAME, summaryGridPane);
         tab2.setClosable(false);
 
         Tab tab3 = new Tab(TAB_3_NAME);
