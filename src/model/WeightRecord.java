@@ -1,20 +1,20 @@
 package model;
 
 public class WeightRecord {
-    private String week;
+    private String month;
     private String weight;
 
-    public WeightRecord(String week, String weight) {
-        this.week = week;
+    public WeightRecord(String month, String weight) {
+        this.month = month;
         this.weight = weight;
     }
 
-    public String getWeek() {
-        return week;
+    public String getMonth() {
+        return month;
     }
 
-    public void setWeek(String week) {
-        this.week = week;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public String getWeight() {
