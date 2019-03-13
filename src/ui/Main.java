@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -17,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.WeightRecord;
 
@@ -41,8 +43,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // ********************************************************************
-
         weightRecords = FXCollections.observableArrayList();
         for (int i = 1; i <= 12; i++) {
             weightRecords.add(new WeightRecord(Integer.toString(i), ""));
@@ -65,9 +65,19 @@ public class Main extends Application {
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-
         BorderPane tab1BorderPane = new BorderPane();
         tab1BorderPane.setLeft(tableView);
+
+        Button setWeightGoalButton = new Button("Set Weight Goal");
+        TextField setWeightGoalTextField = new TextField();
+        setWeightGoalTextField.setMaxWidth(50);
+
+        VBox setWeightGoalVBox = new VBox(setWeightGoalButton, setWeightGoalTextField);
+        setWeightGoalVBox.setAlignment(Pos.CENTER);
+
+        tab1BorderPane.setCenter(setWeightGoalVBox);
+//        tab1BorderPane.setAlignment(setWeightGoalVBox, Pos.BOTTOM_CENTER);
+
 
         TextField enterWeightTextField = new TextField();
         enterWeightTextField.setPrefWidth(ENTER_WEIGHT_TEXTFIELD_WIDTH);
@@ -101,10 +111,22 @@ public class Main extends Application {
         Button deleteButton = new Button();
         ImageView imageView = new ImageView(image);
         deleteButton.setGraphic(imageView);
+        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int i = 0;
+                while (weightRecords.get(i).getWeight() != "" && i < NUMBER_OF_MONTHS_IN_YEAR - 1) {
+                    i++;
+                }
+                if (i > 0) {
+                    weightRecords.set(i - 1, new WeightRecord(Integer.toString(i), ""));
+                }
+            }
+        });
 
-        HBox hBox = new HBox(enterWeightButton, enterWeightTextField, deleteButton);
-        hBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
-        tab1BorderPane.setBottom(hBox);
+        HBox enterWeightHBox = new HBox(enterWeightButton, enterWeightTextField, deleteButton);
+        enterWeightHBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
+        tab1BorderPane.setBottom(enterWeightHBox);
 
         Tab tab1 = new Tab(TAB_1_NAME, tab1BorderPane);
         tab1.setClosable(false);
