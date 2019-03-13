@@ -43,8 +43,8 @@ public class Main extends Application {
     public static final int ENTER_WEIGHT_BUTTON_HEIGHT = 34;
     public static final int SET_WEIGHT_GOAL_TEXTFIELD_WIDTH = 70;
     public static final String ERROR_MESSAGE = "Please enter a valid number";
-    public static final Font SUMMARY_LABEL_HEADING_FONT = new Font("Arial", 20);
-    public static final Font SUMMARY_LABEL_VALUE_FONT = new Font("Arial", 15);
+    public static final Font SUMMARY_LABEL_HEADING_FONT = new Font("Arial", 15);
+    public static final Font SUMMARY_LABEL_VALUE_FONT = new Font("Arial bold", 25);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -170,36 +170,110 @@ public class Main extends Application {
 
         Label startHeading = new Label("Start");
         startHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        startHeading.setMaxWidth(Double.MAX_VALUE);
+        startHeading.setAlignment(Pos.CENTER);
+        startHeading.setUnderline(true);
 
         Label currentHeading = new Label("Current");
         currentHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        currentHeading.setMaxWidth(Double.MAX_VALUE);
+        currentHeading.setAlignment(Pos.CENTER);
+        currentHeading.setUnderline(true);
 
         Label goalHeading =  new Label("Goal");
         goalHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        goalHeading.setMaxWidth(Double.MAX_VALUE);
+        goalHeading.setAlignment(Pos.CENTER);
+        goalHeading.setUnderline(true);
+
         Label startValue = new Label("250 lbs");
         startValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+        startValue.setMaxWidth(Double.MAX_VALUE);
+        startValue.setAlignment(Pos.CENTER);
 
 
         Label currentValue = new Label("200 lbs");
         currentValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+        currentValue.setMaxWidth(Double.MAX_VALUE);
+        currentValue.setAlignment(Pos.CENTER);
 
         Label goalValue = new Label("150 lbs");
         goalValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+        goalValue.setMaxWidth(Double.MAX_VALUE);
+        goalValue.setAlignment(Pos.CENTER);
+
+        VBox startVBox = new VBox(10, startHeading, startValue);
+        VBox currentVBox = new VBox(10, currentHeading, currentValue);
+        VBox goalVBox = new VBox(10, goalHeading, goalValue);
+
+        // ****************************************************************************************************
+
+
+        Label lossHeading = new Label("You lost");
+        lossHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        lossHeading.setMaxWidth(Double.MAX_VALUE);
+        lossHeading.setAlignment(Pos.BOTTOM_CENTER);
+        lossHeading.setUnderline(true);
+
+        Label remainingHeading = new Label("Remaining");
+        remainingHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        remainingHeading.setMaxWidth(Double.MAX_VALUE);
+        remainingHeading.setAlignment(Pos.CENTER);
+        remainingHeading.setUnderline(true);
+
+        Label lossValue = new Label("250 lbs");
+        lossValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+        lossValue.setMaxWidth(Double.MAX_VALUE);
+        lossValue.setAlignment(Pos.CENTER);
+
+
+        Label remainingValue = new Label("200 lbs");
+        remainingValue.setFont(SUMMARY_LABEL_VALUE_FONT);
+        remainingValue.setMaxWidth(Double.MAX_VALUE);
+        remainingValue.setAlignment(Pos.CENTER);
+
+        VBox lossVBox = new VBox(10, lossHeading, lossValue);
+        VBox remainingVBox = new VBox(10, remainingHeading, remainingValue);
+
+
+        // ****************************************************************************************************
+
+
+        Label progressHeading = new Label("Progress");
+        progressHeading.setFont(SUMMARY_LABEL_HEADING_FONT);
+        progressHeading.setMaxWidth(Double.MAX_VALUE);
+        progressHeading.setAlignment(Pos.BOTTOM_CENTER);
+
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setProgress(0.25);
+        progressBar.setMinWidth(200);
+
+        Label progressValue = new Label("100%");
+        progressValue.setFont(new Font("Arial bold", 18));
+        progressValue.setMaxHeight(Double.MAX_VALUE);
+
+        HBox progressHBox = new HBox(10, progressHeading, progressBar, progressValue);
+
+        // ****************************************************************************************************
+
 
         GridPane summaryGridPane = new GridPane();
         summaryGridPane.setAlignment(Pos.TOP_CENTER);
-        summaryGridPane.setHgap(20);
-        summaryGridPane.setVgap(20);
-        summaryGridPane.setPadding(new Insets(30, 30, 30, 30));
+        summaryGridPane.setHgap(40);
+        summaryGridPane.setVgap(60);
+        summaryGridPane.setPadding(new Insets(30, 15, 15, 15));
 
-        summaryGridPane.add(startHeading, 0, 0);
-        summaryGridPane.add(startValue, 0, 1);
+        summaryGridPane.add(startVBox, 0, 0);
+        summaryGridPane.add(currentVBox, 1, 0);
+        summaryGridPane.add(goalVBox, 2, 0);
 
-        summaryGridPane.add(currentHeading, 1, 0);
-        summaryGridPane.add(currentValue, 1, 1);
+        summaryGridPane.add(progressHBox, 0, 1, 3, 1);
 
-        summaryGridPane.add(goalHeading, 2, 0);
-        summaryGridPane.add(goalValue, 2, 1);
+        summaryGridPane.add(lossVBox, 0, 2);
+        summaryGridPane.add(remainingVBox, 2, 2);
+//        summaryGridPane.setGridLinesVisible(true);
+
+
 
 
         // ****************************************************************************************************
