@@ -48,8 +48,8 @@ public class Main extends Application {
     public String currentWeight;
     public int lostWeight;
     public int remainingWeight;
-    public double goalWeight;
     public int progress;
+    public double weightGoalAsNumber;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -183,7 +183,6 @@ public class Main extends Application {
         Tab tab3 = new Tab(TAB_3_NAME);
         tab3.setClosable(false);
 
-
         tab2.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
@@ -233,7 +232,7 @@ public class Main extends Application {
                 goalValue.setAlignment(Pos.CENTER);
 
                 try {
-                    goalWeight = Double.parseDouble(weightGoal);
+                    weightGoalAsNumber = Double.parseDouble(weightGoal);
                     goalValue.setText(weightGoal + " lb");
                 } catch (Exception e) {
                 }
@@ -277,7 +276,7 @@ public class Main extends Application {
                 remainingValue.setMaxWidth(Double.MAX_VALUE);
                 remainingValue.setAlignment(Pos.CENTER);
                 try {
-                    remainingWeight = (int) (Double.parseDouble(currentWeight) - goalWeight);
+                    remainingWeight = (int) (Double.parseDouble(currentWeight) - weightGoalAsNumber);
                     if (remainingWeight < 0) {
                         remainingWeight = 0;
                     }
@@ -310,7 +309,7 @@ public class Main extends Application {
                 progressValue.setMaxHeight(Double.MAX_VALUE);
 
                 try {
-                    int totalWeightToLose = (int) (Double.parseDouble(weightRecords.get(0).getWeight()) - goalWeight);
+                    int totalWeightToLose = (int) (Double.parseDouble(weightRecords.get(0).getWeight()) - weightGoalAsNumber);
                     progress = (int) ((Double.parseDouble(weightRecords.get(0).getWeight())
                             - Double.parseDouble(currentWeight)) / totalWeightToLose * 100);
                     if (progress > 100) {
