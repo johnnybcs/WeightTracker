@@ -21,7 +21,7 @@ public class JsonFileIO {
         try {
             Scanner scanner = new Scanner(jsonDataFile);
             jsonString = scanner.useDelimiter("\\Z").next();
-            
+
             JSONArray jsonArray = new JSONArray(jsonString);
 
             JSONObject weightGoalJson = (JSONObject) jsonArray.get(1);
