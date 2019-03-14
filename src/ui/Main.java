@@ -65,7 +65,6 @@ public class Main extends Application {
         JsonFileIO jsonFileIO = new JsonFileIO();
         jsonFileIO.read();
 
-
         TableView tableView = new TableView();
 
         TableColumn<String, WeightRecord> column1 = new TableColumn<>(COLUMN_1_NAME);
@@ -176,7 +175,6 @@ public class Main extends Application {
                         weightRecords.set(i - 1, new WeightRecord(Integer.toString(i), ""));
                     }
                 }
-                System.out.println("Deleting " + i);
             }
         });
 

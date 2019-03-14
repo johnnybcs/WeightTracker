@@ -21,7 +21,7 @@ public class JsonFileIO {
         try {
             Scanner scanner = new Scanner(jsonDataFile);
             jsonString = scanner.useDelimiter("\\Z").next();
-
+            
             JSONArray jsonArray = new JSONArray(jsonString);
 
             JSONObject weightGoalJson = (JSONObject) jsonArray.get(1);
@@ -29,10 +29,14 @@ public class JsonFileIO {
 
             JSONObject weightRecordsJson = (JSONObject) jsonArray.get(0);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 0; i < 12; i++) {
                 WeightRecord weightRecord =
                         new WeightRecord(Integer.toString(i + 1), weightRecordsJson.getString(Integer.toString(i + 1)));
                 weightRecords.set(i, weightRecord);
+                if (!weightRecords.get(i).getWeight().matches("\\d*.*\\d.*\\d*")) {
+//                    System.out.println(weightRecords.get(i).getWeight());
+                    weightRecords.get(i).setWeight("");
+                }
             }
 
         } catch (Exception e) {
