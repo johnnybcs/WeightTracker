@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class Josnifier {
+public class Jsonifier {
 
     public static JSONObject weightGoalToJson(String weightGoal) {
         JSONObject weightGoalJson = new JSONObject();

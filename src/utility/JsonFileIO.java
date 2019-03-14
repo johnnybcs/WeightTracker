@@ -5,6 +5,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.util.List;
 import java.util.Scanner;
 
 import static ui.Main.weightGoal;
@@ -12,7 +14,7 @@ import static ui.Main.weightRecords;
 
 public class JsonFileIO {
 
-    public static final File jsonDataFile = new File("data.json");
+    public static final File jsonDataFile = new File("savedData.json");
 
     public static void read() {
         String jsonString;
@@ -22,15 +24,32 @@ public class JsonFileIO {
 
             JSONArray jsonArray = new JSONArray(jsonString);
 
+            JSONObject weightGoalJson = (JSONObject) jsonArray.get(1);
+            weightGoal = (String) weightGoalJson.get("weightGoal");
+
             JSONObject weightRecordsJson = (JSONObject) jsonArray.get(0);
+
             for (int i = 0; i < jsonArray.length(); i++) {
                 WeightRecord weightRecord =
                         new WeightRecord(Integer.toString(i + 1), weightRecordsJson.getString(Integer.toString(i + 1)));
-                weightRecords.add(weightRecord);
+                weightRecords.set(i, weightRecord);
             }
-            JSONObject weightGoalJson = (JSONObject) jsonArray.get(1);
-            weightGoal = (String) weightGoalJson.get("weightGoal");
+
         } catch (Exception e) {
+        }
+
+    }
+
+    public static void write(List<WeightRecord> weightRecords, String goalWeight) {
+        try {
+            Jsonifier jsonifier = new Jsonifier();
+            JSONArray jsonArray = jsonifier.dataToJSONArray(weightRecords, goalWeight);
+
+            FileWriter fileWriter = new FileWriter(jsonDataFile);
+            fileWriter.write(jsonArray.toString());
+            fileWriter.flush();
+        } catch (Exception e) {
+
         }
     }
 }

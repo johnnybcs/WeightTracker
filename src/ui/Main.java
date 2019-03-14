@@ -22,6 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.WeightRecord;
+import utility.JsonFileIO;
 
 import static java.lang.Double.parseDouble;
 
@@ -54,12 +55,16 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        weightGoal = "";
+
 
         weightRecords = FXCollections.observableArrayList();
         for (int i = 1; i <= 12; i++) {
             weightRecords.add(new WeightRecord(Integer.toString(i), ""));
         }
+
+        JsonFileIO jsonFileIO = new JsonFileIO();
+        jsonFileIO.read();
+
 
         TableView tableView = new TableView();
 
@@ -91,6 +96,7 @@ public class Main extends Application {
         setWeightGoalHeading.setUnderline(true);
 
         setWeightGoalValue.setFont(new Font("Arial bold", 30));
+        setWeightGoalValue.setText(weightGoal);
 
 
         Slider slider = new Slider();
@@ -102,6 +108,12 @@ public class Main extends Application {
         slider.setMajorTickUnit(25);
         slider.setMinorTickCount(5);
         slider.setSnapToTicks(true);
+        try {
+            slider.setValue(Double.parseDouble(weightGoal));
+        } catch (Exception e) {
+
+        }
+
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -416,4 +428,10 @@ public class Main extends Application {
         launch(args);
     }
 
+    @Override
+    public void stop() throws Exception {
+        JsonFileIO jsonFileIO = new JsonFileIO();
+        jsonFileIO.write(weightRecords, weightGoal);
+        super.stop();
+    }
 }
