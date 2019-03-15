@@ -40,7 +40,7 @@ public class Main extends Application {
     private static final int SCENE_WIDTH = 500;
     private static final int SCENE_HEIGHT = 405;
     private static final int ENTER_WEIGHT_BUTTON_WIDTH = 124;
-    private static final int ENTER_WEIGHT_TEXTFIELD_WIDTH = 124;
+    private static final int SPINNER_WIDTH = 124;
     private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
     public static final int ENTER_WEIGHT_BUTTON_HEIGHT = 34;
     public static final String ERROR_MESSAGE = "Please enter a valid number";
@@ -51,6 +51,7 @@ public class Main extends Application {
     public int remainingWeight;
     public int progress;
     public double weightGoalAsNumber;
+    private String spinnerText;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -129,9 +130,9 @@ public class Main extends Application {
 
         tab1BorderPane.setCenter(setWeightGoalVBox);
 
-        TextField enterWeightTextField = new TextField();
-        enterWeightTextField.setPrefWidth(ENTER_WEIGHT_TEXTFIELD_WIDTH);
-        enterWeightTextField.setPrefHeight(ENTER_WEIGHT_BUTTON_HEIGHT);
+        Spinner spinner = new Spinner(0, 1000, 0, 1);
+        spinner.setEditable(true);
+        spinner.setPrefSize(SPINNER_WIDTH, ENTER_WEIGHT_BUTTON_HEIGHT);
 
         Button enterWeightButton = new Button("Enter Weight");
         enterWeightButton.setPrefWidth(ENTER_WEIGHT_BUTTON_WIDTH);
@@ -147,12 +148,13 @@ public class Main extends Application {
                 }
                 if (i < NUMBER_OF_MONTHS_IN_YEAR) {
                     try {
-                        parseDouble(enterWeightTextField.getText());
+                        spinnerText = spinner.getEditor().getText();
+                        Double.parseDouble(spinnerText);
                     } catch (Exception e) {
                         errorMessage.setText(ERROR_MESSAGE);
                         return;
                     }
-                    weightRecords.set(i, new WeightRecord(Integer.toString(i + 1), enterWeightTextField.getText()));
+                    weightRecords.set(i, new WeightRecord(Integer.toString(i + 1), spinnerText));
                 }
             }
         });
@@ -178,7 +180,7 @@ public class Main extends Application {
             }
         });
 
-        HBox enterWeightHBox = new HBox(enterWeightButton, enterWeightTextField, deleteButton);
+        HBox enterWeightHBox = new HBox(enterWeightButton, spinner, deleteButton);
         enterWeightHBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
         tab1BorderPane.setBottom(enterWeightHBox);
 
@@ -231,10 +233,17 @@ public class Main extends Application {
                 while (weightRecords.get(j).getWeight() != "" && j < NUMBER_OF_MONTHS_IN_YEAR - 1) {
                     j++;
                 }
+
                 if (j > 0) {
-                    currentWeight = weightRecords.get(j - 1).getWeight();
+                    if (j == 11 && weightRecords.get(11).getWeight() != "") {
+                        currentWeight = weightRecords.get(j).getWeight();
+                    } else {
+                        currentWeight = weightRecords.get(j - 1).getWeight();
+                    }
                     currentValue.setText(currentWeight + " lb");
+
                 }
+
 
                 Label goalValue = new Label("");
                 goalValue.setFont(SUMMARY_LABEL_VALUE_FONT);
@@ -274,6 +283,10 @@ public class Main extends Application {
                 try {
                     lostWeight = (int) (parseDouble(weightRecords.get(0).getWeight())
                             - parseDouble(currentWeight));
+                    if (lostWeight < 0) {
+                        lostWeight = 0;
+                    }
+                    
                     lossValue.setText(Integer.toString(lostWeight) + " lb");
                 } catch (
                         Exception e) {
@@ -324,6 +337,8 @@ public class Main extends Application {
                             - Double.parseDouble(currentWeight)) / totalWeightToLose * 100);
                     if (progress > 100) {
                         progress = 100;
+                    } else if (progress < 0)  {
+                        progress = 0;
                     }
                     progressBar.setProgress(((double) progress) / 100);
                     progressValue.setText(Integer.toString(progress) + "%");
