@@ -286,7 +286,7 @@ public class Main extends Application {
                     if (lostWeight < 0) {
                         lostWeight = 0;
                     }
-                    
+
                     lossValue.setText(Integer.toString(lostWeight) + " lb");
                 } catch (
                         Exception e) {
