@@ -51,7 +51,7 @@ public class Tab1 {
         setWeightGoalHeading.setUnderline(true);
 
         setWeightGoalValue.setFont(new Font("Arial bold", 30));
-        setWeightGoalValue.setText(weightGoal);
+        setWeightGoalValue.setText(weightGoal + " lb");
 
         Slider slider = createSlider();
 
