@@ -18,5 +18,5 @@ Select the Graph tab to see how you're doing relative to your goal.
 
 \
 Notes:
-- When you close app and open it up gain, you'll see that all your information had been saved
+- When you close the app and open it up again, you'll see that all your information had been saved
 - The Summary and Graph tabs will automatically update as you make changes to your weight history or weight goal
