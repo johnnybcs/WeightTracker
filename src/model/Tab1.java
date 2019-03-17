@@ -27,12 +27,61 @@ public class Tab1 {
 
     private String spinnerText;
     private String name;
+    private Label setWeightGoalValue;
+    private Spinner spinner;
+    private Label errorMessage;
 
     public Tab1(String name) {
         this.name = name;
     }
 
     public Tab createTab1() {
+        TableView tableView = createTableView();
+
+        BorderPane tab1BorderPane = new BorderPane();
+        tab1BorderPane.setLeft(tableView);
+
+        errorMessage = new Label();
+        errorMessage.setFont(new Font("Arial italic", 14));
+
+        Label setWeightGoalHeading = new Label("WEIGHT GOAL");
+        setWeightGoalValue = new Label();
+
+        setWeightGoalHeading.setFont(new Font("Arial bold", 15));
+        setWeightGoalHeading.setUnderline(true);
+
+        setWeightGoalValue.setFont(new Font("Arial bold", 30));
+        setWeightGoalValue.setText(weightGoal);
+
+        Slider slider = createSlider();
+
+        VBox setWeightGoalVBox = new VBox(setWeightGoalHeading, setWeightGoalValue, slider, errorMessage);
+        setWeightGoalVBox.setAlignment(Pos.TOP_CENTER);
+        setWeightGoalVBox.setMargin(setWeightGoalHeading, new Insets(25, 0, 0, 0));
+        setWeightGoalVBox.setMargin(setWeightGoalValue, new Insets(15, 0, 15, 0));
+        setWeightGoalVBox.setMargin(errorMessage, new Insets(70, 0, 0, 0));
+
+        tab1BorderPane.setCenter(setWeightGoalVBox);
+
+        spinner = new Spinner(0, 1000, 0, 1);
+        spinner.setEditable(true);
+        spinner.setPrefSize(SPINNER_WIDTH, ENTER_WEIGHT_BUTTON_HEIGHT);
+
+        Button enterWeightButton = createEnterWeightButton();
+        Button deleteButton = createDeleteButton();
+
+        HBox enterWeightHBox = new HBox(enterWeightButton, spinner, deleteButton);
+        enterWeightHBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
+        
+        tab1BorderPane.setBottom(enterWeightHBox);
+
+        Tab tab1 = new Tab(this.name, tab1BorderPane);
+        tab1.setClosable(false);
+
+        return tab1;
+    }
+
+    private TableView createTableView() {
         TableView tableView = new TableView();
 
         TableColumn<String, WeightRecord> column1 = new TableColumn<>(COLUMN_1_NAME);
@@ -50,22 +99,10 @@ public class Tab1 {
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        BorderPane tab1BorderPane = new BorderPane();
-        tab1BorderPane.setLeft(tableView);
+        return tableView;
+    }
 
-        Label errorMessage = new Label();
-        errorMessage.setFont(new Font("Arial italic", 14));
-
-        Label setWeightGoalHeading = new Label("WEIGHT GOAL");
-        Label setWeightGoalValue = new Label();
-
-        setWeightGoalHeading.setFont(new Font("Arial bold", 15));
-        setWeightGoalHeading.setUnderline(true);
-
-        setWeightGoalValue.setFont(new Font("Arial bold", 30));
-        setWeightGoalValue.setText(weightGoal);
-
-
+    private Slider createSlider() {
         Slider slider = new Slider();
         slider.setMaxWidth(230);
         slider.setMin(50);
@@ -88,19 +125,10 @@ public class Tab1 {
                 setWeightGoalValue.setText(weightGoal + " lb");
             }
         });
+        return slider;
+    }
 
-        VBox setWeightGoalVBox = new VBox(setWeightGoalHeading, setWeightGoalValue, slider, errorMessage);
-        setWeightGoalVBox.setAlignment(Pos.TOP_CENTER);
-        setWeightGoalVBox.setMargin(setWeightGoalHeading, new Insets(25, 0, 0, 0));
-        setWeightGoalVBox.setMargin(setWeightGoalValue, new Insets(15, 0, 15, 0));
-        setWeightGoalVBox.setMargin(errorMessage, new Insets(70, 0, 0, 0));
-
-        tab1BorderPane.setCenter(setWeightGoalVBox);
-
-        Spinner spinner = new Spinner(0, 1000, 0, 1);
-        spinner.setEditable(true);
-        spinner.setPrefSize(SPINNER_WIDTH, ENTER_WEIGHT_BUTTON_HEIGHT);
-
+    private Button createEnterWeightButton() {
         Button enterWeightButton = new Button("Enter Weight");
         enterWeightButton.setPrefWidth(ENTER_WEIGHT_BUTTON_WIDTH);
         enterWeightButton.setPrefHeight(ENTER_WEIGHT_BUTTON_HEIGHT);
@@ -125,7 +153,10 @@ public class Tab1 {
                 }
             }
         });
+        return enterWeightButton;
+    }
 
+    private Button createDeleteButton() {
         Image image = new Image("toolbarButtonGraphics/general/Delete24.gif");
         Button deleteButton = new Button();
         ImageView imageView = new ImageView(image);
@@ -146,14 +177,6 @@ public class Tab1 {
                 }
             }
         });
-
-        HBox enterWeightHBox = new HBox(enterWeightButton, spinner, deleteButton);
-        enterWeightHBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
-        tab1BorderPane.setBottom(enterWeightHBox);
-
-        Tab tab1 = new Tab(this.name, tab1BorderPane);
-        tab1.setClosable(false);
-
-        return tab1;
+        return deleteButton;
     }
 }
