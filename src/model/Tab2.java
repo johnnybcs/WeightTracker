@@ -25,7 +25,6 @@ public class Tab2 {
     private String currentWeight;
     private int lostWeight;
     private int remainingWeight;
-    private int progress;
     private double weightGoalAsNumber;
     private Label progressValue;
 
@@ -51,18 +50,18 @@ public class Tab2 {
                         createLabel("       Progress", SUMMARY_LABEL_HEADING_FONT, Pos.BOTTOM_CENTER, false);
 
                 Label startValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
-                if (weightRecords.get(0).getWeight() != "") {
+                if (!(weightRecords.get(0).getWeight().equals(""))) {
                     startValue.setText(weightRecords.get(0).getWeight() + " lb");
                 }
 
                 Label currentValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
                 int j = 0;
-                while (weightRecords.get(j).getWeight() != "" && j < NUMBER_OF_MONTHS_IN_YEAR - 1) {
+                while (!(weightRecords.get(j).getWeight().equals("")) && j < NUMBER_OF_MONTHS_IN_YEAR - 1) {
                     j++;
                 }
                 if (j > 0) {
                     if (j == NUMBER_OF_MONTHS_IN_YEAR - 1
-                            && weightRecords.get(NUMBER_OF_MONTHS_IN_YEAR - 1).getWeight() != "") {
+                            && !(weightRecords.get((int) NUMBER_OF_MONTHS_IN_YEAR - 1).getWeight().equals(""))) {
                         currentWeight = weightRecords.get(j).getWeight();
                     } else {
                         currentWeight = weightRecords.get(j - 1).getWeight();
@@ -75,6 +74,7 @@ public class Tab2 {
                     weightGoalAsNumber = Double.parseDouble(weightGoal);
                     goalValue.setText(weightGoal + " lb");
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
 
@@ -88,6 +88,7 @@ public class Tab2 {
                     lossValue.setText(Integer.toString(lostWeight) + " lb");
                 } catch (
                         Exception e) {
+                    e.printStackTrace();
                 }
 
                 Label remainingValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
@@ -99,6 +100,7 @@ public class Tab2 {
                     remainingValue.setText(Integer.toString(remainingWeight) + " lb");
                 } catch (
                         Exception e) {
+                    e.printStackTrace();
                 }
 
                 VBox startVBox = new VBox(10, startHeading, startValue);
@@ -154,7 +156,7 @@ public class Tab2 {
         progressValue = createLabel("", new Font("Arial bold", 18), Pos.CENTER, false);
         try {
             int totalWeightToLose = (int) (Double.parseDouble(weightRecords.get(0).getWeight()) - weightGoalAsNumber);
-            progress = (int) ((Double.parseDouble(weightRecords.get(0).getWeight())
+            int progress = (int) ((Double.parseDouble(weightRecords.get(0).getWeight())
                     - Double.parseDouble(currentWeight)) / totalWeightToLose * 100);
             if (progress > 100) {
                 progress = 100;
@@ -166,6 +168,7 @@ public class Tab2 {
 
         } catch (
                 Exception e) {
+            e.printStackTrace();
         }
         return progressBar;
     }

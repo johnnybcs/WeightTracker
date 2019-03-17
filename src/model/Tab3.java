@@ -44,26 +44,26 @@ public class Tab3 {
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel(Y_AXIS_NAME);
 
-        LineChart lineChart = new LineChart(xAxis, yAxis);
+        LineChart lineChart = new LineChart<>(xAxis, yAxis);
 
-        XYChart.Series dataSeries1 = new XYChart.Series();
+        XYChart.Series<Double, Double> dataSeries1 = new XYChart.Series<Double, Double>();
         dataSeries1.setName("Your Weight");
 
         for (WeightRecord weightRecord : weightRecords) {
-            if (weightRecord.getWeight() != "") {
+            if (!weightRecord.getWeight().equals("")) {
                 double x = parseDouble(weightRecord.getMonth());
                 double y = parseDouble(weightRecord.getWeight());
-                dataSeries1.getData().add(new XYChart.Data(x, y));
+                dataSeries1.getData().add(new XYChart.Data<Double, Double>(x, y));
             }
         }
 
-        XYChart.Series dataSeries2 = new XYChart.Series();
+        XYChart.Series<Double, Double> dataSeries2 = new XYChart.Series<Double, Double>();
         dataSeries2.setName("Goal");
-        if (weightRecords.get(0).getWeight() != "" && weightGoal != "") {
-            dataSeries2.getData().add(new XYChart.Data(1,
+        if ((!weightRecords.get(0).getWeight().equals("")) && !(weightGoal.equals(""))) {
+            dataSeries2.getData().add(new XYChart.Data<Double, Double>(1.0,
                     parseDouble(weightRecords.get(0).getWeight())));
 
-            dataSeries2.getData().add(new XYChart.Data(NUMBER_OF_MONTHS_IN_YEAR,
+            dataSeries2.getData().add(new XYChart.Data<>(NUMBER_OF_MONTHS_IN_YEAR,
                     parseDouble(weightGoal)));
         }
 

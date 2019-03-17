@@ -72,7 +72,7 @@ public class Tab1 {
 
         HBox enterWeightHBox = new HBox(enterWeightButton, spinner, deleteButton);
         enterWeightHBox.setMargin(deleteButton, new Insets(0, 0, 10, 10));
-        
+
         tab1BorderPane.setBottom(enterWeightHBox);
 
         Tab tab1 = new Tab(this.name, tab1BorderPane);
@@ -82,15 +82,15 @@ public class Tab1 {
     }
 
     private TableView createTableView() {
-        TableView tableView = new TableView();
+        TableView<WeightRecord> tableView = new TableView<>();
 
-        TableColumn<String, WeightRecord> column1 = new TableColumn<>(COLUMN_1_NAME);
+        TableColumn<WeightRecord, String> column1 = new TableColumn<>(COLUMN_1_NAME);
         column1.setCellValueFactory(new PropertyValueFactory<>("month"));
         column1.setStyle("-fx-alignment: CENTER");
         column1.setSortable(false);
 
-        TableColumn column2 = new TableColumn<>(COLUMN_2_NAME);
-        column2.setCellValueFactory(new PropertyValueFactory("weight"));
+        TableColumn<WeightRecord, String> column2 = new TableColumn<>(COLUMN_2_NAME);
+        column2.setCellValueFactory(new PropertyValueFactory<>("weight"));
         column2.setStyle("-fx-alignment: CENTER");
         column2.setSortable(false);
 
@@ -115,7 +115,7 @@ public class Tab1 {
         try {
             slider.setValue(Double.parseDouble(weightGoal));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         slider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -138,7 +138,7 @@ public class Tab1 {
             public void handle(ActionEvent event) {
                 errorMessage.setText("");
                 int i = 0;
-                while (weightRecords.get(i).getWeight() != "" && i < NUMBER_OF_MONTHS_IN_YEAR - 1) {
+                while (!(weightRecords.get(i).getWeight().equals("")) && i < NUMBER_OF_MONTHS_IN_YEAR - 1) {
                     i++;
                 }
                 if (i < NUMBER_OF_MONTHS_IN_YEAR) {
@@ -165,11 +165,11 @@ public class Tab1 {
             @Override
             public void handle(ActionEvent event) {
                 int i = 0;
-                while (weightRecords.get(i).getWeight() != "" && i < NUMBER_OF_MONTHS_IN_YEAR - 1) {
+                while (!(weightRecords.get(i).getWeight().equals("")) && i < NUMBER_OF_MONTHS_IN_YEAR - 1) {
                     i++;
                 }
                 if (i > 0) {
-                    if (i == 11 && weightRecords.get(11).getWeight() != "") {
+                    if (i == 11 && (!weightRecords.get(11).getWeight().equals(""))) {
                         weightRecords.set(i, new WeightRecord(Integer.toString(i + 1), ""));
                     } else {
                         weightRecords.set(i - 1, new WeightRecord(Integer.toString(i), ""));

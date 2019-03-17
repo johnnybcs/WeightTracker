@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Jsonifier {
 
-    public static JSONObject weightGoalToJson(String weightGoal) {
+    public JSONObject weightGoalToJson(String weightGoal) {
         JSONObject weightGoalJson = new JSONObject();
         weightGoalJson.put("weightGoal", weightGoal);
         return weightGoalJson;
     }
 
-    public static JSONObject weightRecordsToJson(List<WeightRecord> weightRecords) {
+    public JSONObject weightRecordsToJson(List<WeightRecord> weightRecords) {
         JSONObject weightRecordsJson = new JSONObject();
         for (int i = 0; i < weightRecords.size(); i++) {
             weightRecordsJson.put(Integer.toString(i + 1), weightRecords.get(i).getWeight());
@@ -22,7 +22,7 @@ public class Jsonifier {
         return weightRecordsJson;
     }
 
-    public static JSONArray dataToJSONArray(List<WeightRecord> weightRecords, String goalWeight) {
+    public JSONArray dataToJSONArray(List<WeightRecord> weightRecords, String goalWeight) {
         JSONArray JSONArray = new JSONArray();
         JSONArray.put(weightRecordsToJson(weightRecords));
         JSONArray.put(weightGoalToJson(goalWeight));

@@ -14,9 +14,9 @@ import static ui.Main.weightRecords;
 
 public class JsonFileIO {
 
-    public static final File jsonDataFile = new File("savedData.json");
+    private static final File jsonDataFile = new File("savedData.json");
 
-    public static void read() {
+    public void read() {
         String jsonString;
         try {
             Scanner scanner = new Scanner(jsonDataFile);
@@ -40,11 +40,12 @@ public class JsonFileIO {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
 
-    public static void write(List<WeightRecord> weightRecords, String goalWeight) {
+    public void write(List<WeightRecord> weightRecords, String goalWeight) {
         try {
             Jsonifier jsonifier = new Jsonifier();
             JSONArray jsonArray = jsonifier.dataToJSONArray(weightRecords, goalWeight);
@@ -53,7 +54,7 @@ public class JsonFileIO {
             fileWriter.write(jsonArray.toString());
             fileWriter.flush();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

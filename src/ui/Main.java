@@ -16,7 +16,7 @@ import utility.JsonFileIO;
 
 
 public class Main extends Application {
-    public static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
+    public static final double NUMBER_OF_MONTHS_IN_YEAR = 12;
 
     public static ObservableList<WeightRecord> weightRecords;
     public static String weightGoal;
@@ -25,10 +25,8 @@ public class Main extends Application {
     private static final String TAB_2_NAME = "Summary";
     private static final String TAB_3_NAME = "Graph";
 
-
     private static final int SCENE_WIDTH = 500;
     private static final int SCENE_HEIGHT = 405;
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
