@@ -22,11 +22,14 @@ public class Tab2 {
     private static final Font SUMMARY_LABEL_HEADING_FONT = new Font("Arial", 15);
     private static final Font SUMMARY_LABEL_VALUE_FONT = new Font("Arial bold", 25);
 
-    private String currentWeight;
+    public static String startingWeight;
+    public static String currentWeight;
     private int lostWeight;
     private int remainingWeight;
     private double weightGoalAsNumber;
     private Label progressValue;
+
+
 
     private String name;
 
@@ -37,6 +40,9 @@ public class Tab2 {
     public Tab createTab2() {
         Tab tab2 = new Tab(name);
         tab2.setClosable(false);
+
+        startingWeight = getStartingWeight();
+        currentWeight = getCurrentWeight();
 
         tab2.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
@@ -50,24 +56,14 @@ public class Tab2 {
                         createLabel("       Progress", SUMMARY_LABEL_HEADING_FONT, Pos.BOTTOM_CENTER, false);
 
                 Label startValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
-                if (!(weightRecords.get(0).getWeight().equals(""))) {
-                    startValue.setText(weightRecords.get(0).getWeight() + " lb");
-                }
+
+                startingWeight = getStartingWeight();
+                startValue.setText(startingWeight + " lb");
 
                 Label currentValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
-                int j = 0;
-                while (!(weightRecords.get(j).getWeight().equals("")) && j < NUMBER_OF_MONTHS_IN_YEAR - 1) {
-                    j++;
-                }
-                if (j > 0) {
-                    if (j == NUMBER_OF_MONTHS_IN_YEAR - 1
-                            && !(weightRecords.get((int) NUMBER_OF_MONTHS_IN_YEAR - 1).getWeight().equals(""))) {
-                        currentWeight = weightRecords.get(j).getWeight();
-                    } else {
-                        currentWeight = weightRecords.get(j - 1).getWeight();
-                    }
-                    currentValue.setText(currentWeight + " lb");
-                }
+
+                currentWeight = getCurrentWeight();
+                currentValue.setText(currentWeight + " lb");
 
                 Label goalValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
                 try {
@@ -171,6 +167,29 @@ public class Tab2 {
             e.printStackTrace();
         }
         return progressBar;
+    }
+
+    private String getStartingWeight() {
+        if (!(weightRecords.get(0).getWeight().equals(""))) {
+            return weightRecords.get(0).getWeight();
+        }
+        return "";
+    }
+
+    private String getCurrentWeight() {
+        int j = 0;
+        while (!(weightRecords.get(j).getWeight().equals("")) && j < NUMBER_OF_MONTHS_IN_YEAR - 1) {
+            j++;
+        }
+        if (j > 0) {
+            if (j == NUMBER_OF_MONTHS_IN_YEAR - 1
+                    && !(weightRecords.get((int) NUMBER_OF_MONTHS_IN_YEAR - 1).getWeight().equals(""))) {
+                return weightRecords.get(j).getWeight();
+            } else {
+                return weightRecords.get(j - 1).getWeight();
+            }
+        }
+        return "";
     }
 }
 

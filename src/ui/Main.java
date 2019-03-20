@@ -8,10 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Tab1;
-import model.Tab2;
-import model.Tab3;
-import model.WeightRecord;
+import model.*;
 import utility.JsonFileIO;
 
 
@@ -24,6 +21,7 @@ public class Main extends Application {
     private static final String TAB_1_NAME = "History";
     private static final String TAB_2_NAME = "Summary";
     private static final String TAB_3_NAME = "Graph";
+    private static final String TAB_4_NAME = "Coach";
 
     private static final int SCENE_WIDTH = 500;
     private static final int SCENE_HEIGHT = 405;
@@ -42,8 +40,9 @@ public class Main extends Application {
         Tab tab1 = new Tab1(TAB_1_NAME).createTab1();
         Tab tab2 = new Tab2(TAB_2_NAME).createTab2();
         Tab tab3 = new Tab3(TAB_3_NAME).createTab3();
+        Tab tab4 = new Tab4(TAB_4_NAME).createTab4();
 
-        TabPane tabPane = new TabPane(tab1, tab2, tab3);
+        TabPane tabPane = new TabPane(tab1, tab2, tab3, tab4);
 
         BorderPane root = new BorderPane();
         root.setCenter(tabPane);
