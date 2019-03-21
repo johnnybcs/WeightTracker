@@ -37,18 +37,20 @@ public class Tab4 {
         Tab tab4 = new Tab(name);
         tab4.setClosable(false);
 
+
+        textArea = new TextArea();
+        textArea.setEditable(false);
+        textArea.setPrefHeight(TEXT_AREA_HEIGHT);
+        textArea.setWrapText(true);
+        textArea.setText(COACH_NAME + "What can I do for you today?\n");
+
+        textField = new TextField();
+
         tab4.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event event) {
                 if (tab4.isSelected()) {
 
-                    textArea = new TextArea();
-                    textArea.setEditable(false);
-                    textArea.setPrefHeight(TEXT_AREA_HEIGHT);
-                    textArea.setWrapText(true);
-                    textArea.setText(COACH_NAME + "What can I do for you today?\n");
-
-                    textField = new TextField();
                     textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
                         @Override
                         public void handle(KeyEvent keyEvent) {
