@@ -89,7 +89,7 @@ public class Tab4 {
 
     private void reply() {
         randomNumberGenerator = new Random();
-        int randomNumber = randomNumberGenerator.nextInt(20) + 1;
+        int randomNumber = randomNumberGenerator.nextInt(10) + 1;
         if (userInput.contains("hi") || userInput.contains("hello")
                 || userInput.contains("hey") || userInput.contains("how are you")
                 || userInput.contains("how's it going") || userInput.contains("what's up")
@@ -197,52 +197,34 @@ public class Tab4 {
 
             switch (randomNumber) {
                 case (1):
-                    coachResponse("Only you can change your life. No one can do it for you.");
+                    coachResponse("Where there is no struggle, there is no strength.");
                     break;
                 case (2):
-                    coachResponse("Doubt kills more dreams than failure ever will.");
-                    break;
-                case (3):
                     coachResponse("The struggle you are in today is developing the strength you need for tomorrow.");
                     break;
+                case (3):
+                    coachResponse("Never, never, never give up.");
+                    break;
                 case (4):
-                    coachResponse("The road may be bumpy, but stay committed to the process.");
-                    break;
-                case (5):
-                    coachResponse("Will is a skill.");
-                    break;
-                case (6):
-                    coachResponse("Stressed spelled backwards is desserts. Coincidence? I think not!");
-                    break;
-                case (7):
-                    coachResponse("Someone busier than you is running right now.");
-                    break;
-                case (8):
-                    coachResponse("You can't cross the sea merely by standing and staring at the water.");
-                    break;
-                case (9):
-                    coachResponse("Strive for progress, not perfection.");
-                    break;
-                case (10):
-                    coachResponse("Make your body the sexiest outfit you own.");
-                    break;
-                case (11):
-                    coachResponse("It won't be easy but it'll be worth it.");
-                    break;
-                case (12):
-                    coachResponse("Never let a stumble in the road be the end of your journey.");
-                    break;
-                case (13):
                     coachResponse("Look back at where you came from and let yourself feel proud about your progress.");
                     break;
-                case (14):
-                    coachResponse("Eat less sugar. You're sweet enough already.");
+                case (5):
+                    coachResponse("The past cannot be changed, but the future is yet in your power.");
                     break;
-                case (15):
-                    coachResponse("When you feel like quitting, think about why you started.");
+                case (6):
+                    coachResponse("Life is 10 percent what happens to you and 90 percent how you react to it.");
+                    break;
+                case (7):
+                    coachResponse("Have faith in yourself! You are a strong and beautiful person!");
+                    break;
+                case (8):
+                    coachResponse("It doesn't get EASIER. You just get STRONGER.");
+                    break;
+                case(9):
+                    coachResponse("What defines us is how well we rise after falling.");
                     break;
                 default:
-                    coachResponse("Never, never, never give up.");
+                    coachResponse("Never let a stumble in the road be the end of your journey.");
             }
         }
     }

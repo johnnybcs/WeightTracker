@@ -17,6 +17,10 @@ Select the Graph tab to see how you're doing relative to your goal.
 <img width="498" alt="3" src="https://user-images.githubusercontent.com/47739019/54495506-a499fb00-48a1-11e9-8a19-0cce7da3a1ee.png">
 
 \
+If you need some motivation, chat with the coach. He'll get you pumped up!
+<img width="497" alt="8" src="https://user-images.githubusercontent.com/47739019/54788267-ab02dc80-4beb-11e9-8f21-6cd69a0b7da2.png">
+
+\
 Notes:
 - When you close the app and open it up again, you'll see that all your information had been saved
 - The Summary and Graph tabs will automatically update as you make changes to your weight history or weight goal
