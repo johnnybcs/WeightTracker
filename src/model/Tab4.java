@@ -91,10 +91,10 @@ public class Tab4 {
         randomNumberGenerator = new Random();
         int randomNumber = randomNumberGenerator.nextInt(20) + 1;
         if (userInput.contains("hi") || userInput.contains("hello")
-                    || userInput.contains("hey") || userInput.contains("how are you")
-                    || userInput.contains("how's it going") || userInput.contains("what's up")
-                    || userInput.contains("good morning") || userInput.contains("good afternoon")
-                    || userInput.contains("good evening") || userInput.contains("nice to meet")) {
+                || userInput.contains("hey") || userInput.contains("how are you")
+                || userInput.contains("how's it going") || userInput.contains("what's up")
+                || userInput.contains("good morning") || userInput.contains("good afternoon")
+                || userInput.contains("good evening") || userInput.contains("nice to meet")) {
 
             switch (randomNumber) {
                 case (1):
@@ -122,8 +122,8 @@ public class Tab4 {
                     coachResponse("Hello!");
             }
         } else if (userInput.contains("bye") || userInput.contains("goodbye")
-                    || userInput.contains("farewell") || userInput.contains("later")
-                    || userInput.contains("so long") || userInput.contains("see ya")) {
+                || userInput.contains("farewell") || userInput.contains("later")
+                || userInput.contains("so long") || userInput.contains("see ya")) {
 
             switch (randomNumber) {
                 case (1):
@@ -152,20 +152,25 @@ public class Tab4 {
             }
         } else if (userInput.contains("thank")) {
 
-                switch (randomNumber) {
-                    case (1):
-                        coachResponse("No problem!");
-                        break;
-                    case (2):
-                        coachResponse("You're welcome.");
-                        break;
-                    case (3):
-                        coachResponse("My pleasure.");
-                        break;
-                    default:
-                        coachResponse("I'm happy to help.");
-                }
-
+            switch (randomNumber) {
+                case (1):
+                    coachResponse("No problem!");
+                    break;
+                case (2):
+                    coachResponse("You're welcome.");
+                    break;
+                case (3):
+                    coachResponse("My pleasure.");
+                    break;
+                default:
+                    coachResponse("I'm happy to help.");
+            }
+        } else if (userInput.contains("how do")
+                || userInput.contains("how to")
+                || userInput.contains("what do")
+                || userInput.contains("should")
+                || userInput.contains("do to")) {
+            coachResponse("Diet and exercise!");
         } else if (userInput.contains("starting weight")
                 || userInput.contains("start weight")) {
             coachResponse("You weighed " + startingWeight
@@ -173,6 +178,7 @@ public class Tab4 {
         } else if (userInput.contains("current weight")
                 || userInput.contains("recent weight")
                 || userInput.contains("latest weight")
+                || userInput.contains("how much do i weigh")
                 || userInput.contains("my weight")) {
             coachResponse("You currently weigh " + currentWeight
                     + " pounds.");
@@ -187,10 +193,6 @@ public class Tab4 {
                 || userInput.contains("how much weight did i lose")
                 || userInput.contains("weight loss")) {
             coachResponse("You lost " + lostWeight + " pounds so far.");
-        } else if (userInput.contains("how do")
-                || userInput.contains("how to")
-                || userInput.contains("do to")) {
-            coachResponse("Diet and exercise!");
         } else {
 
             switch (randomNumber) {
