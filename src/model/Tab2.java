@@ -24,11 +24,11 @@ public class Tab2 {
 
     public static String startingWeight;
     public static String currentWeight;
-    private int lostWeight;
-    private int remainingWeight;
+    public static String remainingWeight;
+    public static String lostWeight;
+
     private double weightGoalAsNumber;
     private Label progressValue;
-
 
 
     private String name;
@@ -43,6 +43,8 @@ public class Tab2 {
 
         startingWeight = getStartingWeight();
         currentWeight = getCurrentWeight();
+        remainingWeight = getRemainingWeight();
+        lostWeight = getLostWeight();
 
         tab2.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
@@ -75,29 +77,12 @@ public class Tab2 {
 
 
                 Label lossValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
-                try {
-                    lostWeight = (int) (parseDouble(weightRecords.get(0).getWeight())
-                            - parseDouble(currentWeight));
-                    if (lostWeight < 0) {
-                        lostWeight = 0;
-                    }
-                    lossValue.setText(Integer.toString(lostWeight) + " lb");
-                } catch (
-                        Exception e) {
-                    e.printStackTrace();
-                }
+                lostWeight = getLostWeight();
+                lossValue.setText(lostWeight + " lb");
 
                 Label remainingValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
-                try {
-                    remainingWeight = (int) (Double.parseDouble(currentWeight) - weightGoalAsNumber);
-                    if (remainingWeight < 0) {
-                        remainingWeight = 0;
-                    }
-                    remainingValue.setText(Integer.toString(remainingWeight) + " lb");
-                } catch (
-                        Exception e) {
-                    e.printStackTrace();
-                }
+                remainingWeight = getRemainingWeight();
+                remainingValue.setText(remainingWeight + " lb");
 
                 VBox startVBox = new VBox(10, startHeading, startValue);
                 VBox currentVBox = new VBox(10, currentHeading, currentValue);
@@ -188,6 +173,35 @@ public class Tab2 {
             } else {
                 return weightRecords.get(j - 1).getWeight();
             }
+        }
+        return "";
+    }
+
+    private String getRemainingWeight() {
+        try {
+            remainingWeight = Integer.toString((int) (Double.parseDouble(currentWeight) - weightGoalAsNumber));
+            if (Integer.parseInt(remainingWeight) < 0) {
+                remainingWeight = "0";
+            }
+            return remainingWeight;
+        } catch (
+                Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private String getLostWeight() {
+        try {
+            lostWeight = Integer.toString((int) (parseDouble(weightRecords.get(0).getWeight())
+                    - parseDouble(currentWeight)));
+            if (Integer.parseInt(lostWeight) < 0) {
+                lostWeight = "0";
+            }
+            return lostWeight;
+        } catch (
+                Exception e) {
+            e.printStackTrace();
         }
         return "";
     }
