@@ -165,6 +165,12 @@ public class Tab4 {
                 default:
                     coachResponse("I'm happy to help.");
             }
+        } else if (userInput.contains("how are you")
+                || userInput.contains("whats up")
+                || userInput.contains("hows it going")
+                || userInput.contains("how's it going")
+                || userInput.contains("what's up")) {
+            coachResponse("I'm good. Thanks for asking.");
         } else if (userInput.contains("how do")
                 || userInput.contains("how to")
                 || userInput.contains("what do")
