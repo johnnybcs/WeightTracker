@@ -165,6 +165,14 @@ public class Tab4 {
                 default:
                     coachResponse("I'm happy to help.");
             }
+        } else if (userInput.contains("i want")
+                || userInput.contains("i wish")
+                || userInput.contains("help")
+                || userInput.contains("i hope")
+                || userInput.contains("attempting to")
+                || userInput.contains("trying to")
+                || userInput.contains("try to")) {
+            coachResponse("Where there's a will, there's a way! Eat less sugar. You're sweet enough already!");
         } else if (userInput.contains("how are you")
                 || userInput.contains("whats up")
                 || userInput.contains("hows it going")
@@ -196,7 +204,7 @@ public class Tab4 {
                 || userInput.contains("have left")) {
             coachResponse("Just " + remainingWeight + " pounds to go!");
         } else if (userInput.contains("i lost")
-                || userInput.contains("how much weight did i lose")
+                || userInput.contains("did i lose")
                 || userInput.contains("weight loss")) {
             coachResponse("You lost " + lostWeight + " pounds so far.");
         } else {
