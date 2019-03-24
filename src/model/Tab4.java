@@ -185,6 +185,12 @@ public class Tab4 {
                 || userInput.contains("should")
                 || userInput.contains("do to")) {
             coachResponse("Diet and exercise!");
+        } else if (userInput.contains("ok")
+                || userInput.contains("okay")
+                || userInput.contains("sure")
+                || userInput.contains("alright")
+                || userInput.contains("k")) {
+            coachResponse(" :)");
         } else if (userInput.contains("starting weight")
                 || userInput.contains("start weight")) {
             coachResponse("You weighed " + startingWeight
