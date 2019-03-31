@@ -7,10 +7,13 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tab;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import static java.lang.Double.parseDouble;
 import static ui.Main.*;
 
-public class Tab3 {
+public class Tab3 implements Observer {
     private static final String X_AXIS_NAME = "Month";
     private static final String Y_AXIS_NAME = "Weight (lb)";
 
@@ -71,5 +74,10 @@ public class Tab3 {
         lineChart.getData().add(dataSeries2);
 
         return lineChart;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }

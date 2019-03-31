@@ -13,11 +13,13 @@ import javafx.scene.layout.VBox;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Random;
 
-import static model.Tab2.*;
+import static ui.Main.weightGoal;
 
-public class Tab4 {
+public class Tab4 implements Observer {
     private static final int TEXT_AREA_HEIGHT = 325;
     private static final String COACH_NAME = "Coach:  ";
     private static final String USER_NAME = "You:  ";
@@ -27,10 +29,13 @@ public class Tab4 {
     private TextArea textArea;
     private String userInput;
     private Random randomNumberGenerator;
+    private Tab2 tab2;
 
 
     public Tab4(String name) {
         this.name = name;
+        this.tab2 = new Tab2("Summary");
+        tab2.updateWeights();
     }
 
     public Tab createTab4() {
@@ -88,6 +93,7 @@ public class Tab4 {
     }
 
     private void reply() {
+        tab2.updateWeights();
         randomNumberGenerator = new Random();
         int randomNumber = randomNumberGenerator.nextInt(10) + 1;
         if (userInput.contains("hi") || userInput.contains("hello")
@@ -193,26 +199,26 @@ public class Tab4 {
             coachResponse(" :)");
         } else if (userInput.contains("starting weight")
                 || userInput.contains("start weight")) {
-            coachResponse("You weighed " + startingWeight
+            coachResponse("You weighed " + tab2.getStartingWeight()
                     + " pounds when you started your weight loss journey.");
         } else if (userInput.contains("current weight")
                 || userInput.contains("recent weight")
                 || userInput.contains("latest weight")
                 || userInput.contains("how much do i weigh")
                 || userInput.contains("my weight")) {
-            coachResponse("You currently weigh " + currentWeight
+            coachResponse("You currently weigh " + tab2.getCurrentWeight()
                     + " pounds.");
         } else if (userInput.contains("goal")
                 || userInput.contains("target weight")) {
-            coachResponse("You had set a weight goal of " + currentWeight + " pounds for yourself.");
-        } else if (userInput.contains("remaining weight")
+            coachResponse("You had set a weight goal of " + weightGoal + " pounds for yourself.");
+        } else if (userInput.contains("remaining")
                 || userInput.contains("to lose")
                 || userInput.contains("have left")) {
-            coachResponse("Just " + remainingWeight + " pounds to go!");
+            coachResponse("Just " + tab2.getRemainingWeight() + " pounds to go!");
         } else if (userInput.contains("i lost")
                 || userInput.contains("did i lose")
                 || userInput.contains("weight loss")) {
-            coachResponse("You lost " + lostWeight + " pounds so far.");
+            coachResponse("You lost " + tab2.getLostWeight() + " pounds so far.");
         } else {
 
             switch (randomNumber) {
@@ -247,5 +253,10 @@ public class Tab4 {
                     coachResponse("Never let a stumble in the road be the end of your journey.");
             }
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        tab2.updateWeights();
     }
 }

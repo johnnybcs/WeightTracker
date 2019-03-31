@@ -13,38 +13,32 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-import static ui.Main.*;
+import java.util.Observable;
+import java.util.Observer;
 
 import static java.lang.Double.parseDouble;
-import static ui.Main.NUMBER_OF_MONTHS_IN_YEAR;
+import static ui.Main.*;
 
-public class Tab2 {
+public class Tab2 implements Observer {
     private static final Font SUMMARY_LABEL_HEADING_FONT = new Font("Arial", 15);
     private static final Font SUMMARY_LABEL_VALUE_FONT = new Font("Arial bold", 25);
 
-    public static String startingWeight;
-    public static String currentWeight;
-    public static String remainingWeight;
-    public static String lostWeight;
-
-    private double weightGoalAsNumber;
+    private  String startingWeight;
+    private  String currentWeight;
+    private  String remainingWeight;
+    private  String lostWeight;
     private Label progressValue;
-
 
     private String name;
 
     public Tab2(String name) {
         this.name = name;
+        updateWeights();
     }
 
     public Tab createTab2() {
         Tab tab2 = new Tab(name);
         tab2.setClosable(false);
-
-        startingWeight = getStartingWeight();
-        currentWeight = getCurrentWeight();
-        remainingWeight = getRemainingWeight();
-        lostWeight = getLostWeight();
 
         tab2.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
@@ -69,8 +63,7 @@ public class Tab2 {
 
                 Label goalValue = createLabel("", SUMMARY_LABEL_VALUE_FONT, Pos.CENTER, false);
                 try {
-                    weightGoalAsNumber = Double.parseDouble(weightGoal);
-                    goalValue.setText(weightGoal + " lb");
+                    goalValue.setText(Double.parseDouble(weightGoal) + " lb");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -119,6 +112,13 @@ public class Tab2 {
         return tab2;
     }
 
+    public void updateWeights() {
+        startingWeight = getStartingWeight();
+        currentWeight = getCurrentWeight();
+        remainingWeight = getRemainingWeight();
+        lostWeight = getLostWeight();
+    }
+
     private Label createLabel(String labelName, Font font, Pos position, Boolean underline) {
         Label label = new Label(labelName);
         label.setFont(font);
@@ -136,7 +136,7 @@ public class Tab2 {
 
         progressValue = createLabel("", new Font("Arial bold", 18), Pos.CENTER, false);
         try {
-            int totalWeightToLose = (int) (Double.parseDouble(weightRecords.get(0).getWeight()) - weightGoalAsNumber);
+            int totalWeightToLose = (int) (Double.parseDouble(weightRecords.get(0).getWeight()) - Double.parseDouble(weightGoal));
             int progress = (int) ((Double.parseDouble(weightRecords.get(0).getWeight())
                     - Double.parseDouble(currentWeight)) / totalWeightToLose * 100);
             if (progress > 100) {
@@ -154,14 +154,14 @@ public class Tab2 {
         return progressBar;
     }
 
-    private String getStartingWeight() {
+    public String getStartingWeight() {
         if (!(weightRecords.get(0).getWeight().equals(""))) {
             return weightRecords.get(0).getWeight();
         }
         return "";
     }
 
-    private String getCurrentWeight() {
+    public String getCurrentWeight() {
         int j = 0;
         while (!(weightRecords.get(j).getWeight().equals("")) && j < NUMBER_OF_MONTHS_IN_YEAR - 1) {
             j++;
@@ -177,9 +177,9 @@ public class Tab2 {
         return "";
     }
 
-    private String getRemainingWeight() {
+    public String getRemainingWeight() {
         try {
-            remainingWeight = Integer.toString((int) (Double.parseDouble(currentWeight) - weightGoalAsNumber));
+            remainingWeight = Integer.toString((int) (Double.parseDouble(currentWeight) - Double.parseDouble(weightGoal)));
             if (Integer.parseInt(remainingWeight) < 0) {
                 remainingWeight = "0";
             }
@@ -191,7 +191,7 @@ public class Tab2 {
         return "";
     }
 
-    private String getLostWeight() {
+    public String getLostWeight() {
         try {
             lostWeight = Integer.toString((int) (parseDouble(weightRecords.get(0).getWeight())
                     - parseDouble(currentWeight)));
@@ -204,6 +204,11 @@ public class Tab2 {
             e.printStackTrace();
         }
         return "";
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateWeights();
     }
 }
 

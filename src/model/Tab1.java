@@ -15,9 +15,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.Observable;
+
 import static ui.Main.*;
 
-public class Tab1 {
+public class Tab1 extends Observable {
     private static final String COLUMN_1_NAME = "Month";
     private static final String COLUMN_2_NAME = "Weight (lb)";
     private static final int ENTER_WEIGHT_BUTTON_WIDTH = 124;
@@ -78,6 +80,9 @@ public class Tab1 {
         Tab tab1 = new Tab(this.name, tab1BorderPane);
         tab1.setClosable(false);
 
+        setChanged();
+        notifyObservers();
+
         return tab1;
     }
 
@@ -123,6 +128,8 @@ public class Tab1 {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 weightGoal = Integer.toString((int) (newValue.doubleValue()));
                 setWeightGoalValue.setText(weightGoal + " lb");
+                setChanged();
+                notifyObservers();
             }
         });
         return slider;
@@ -151,6 +158,8 @@ public class Tab1 {
                     }
                     weightRecords.set(i, new WeightRecord(Integer.toString(i + 1), spinnerText));
                 }
+                setChanged();
+                notifyObservers();
             }
         });
         return enterWeightButton;
@@ -175,6 +184,8 @@ public class Tab1 {
                         weightRecords.set(i - 1, new WeightRecord(Integer.toString(i), ""));
                     }
                 }
+                setChanged();
+                notifyObservers();
             }
         });
         return deleteButton;
