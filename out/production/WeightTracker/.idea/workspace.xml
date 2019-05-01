@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5059e839-7d4e-47ce-b859-3eca4c973a4a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/WeightTracker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WeightTracker/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Tab3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tab3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Tab4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Tab4.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/Tab4.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="183" column="107" selection-start-line="183" selection-start-column="107" selection-end-line="183" selection-end-column="107" />
+            <state relative-caret-position="346">
+              <caret line="188" column="34" selection-start-line="188" selection-start-column="34" selection-end-line="188" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -540,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1554015902992</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Increased range of responses">
+      <created>1556679455316</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1556679455316</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -555,7 +560,7 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32894737" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33114034" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33114034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991228" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -602,7 +607,6 @@
     </layout-to-restore>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="V4" />
     <MESSAGE value="Added delete button" />
     <MESSAGE value="Added goal weight button" />
     <MESSAGE value="Added goal weight graph" />
@@ -627,7 +631,8 @@
     <MESSAGE value="Made chatbot more robust" />
     <MESSAGE value="Formatted Readme" />
     <MESSAGE value="Implemented Observer Design Pattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Observer Design Pattern" />
+    <MESSAGE value="Increased range of responses" />
+    <option name="LAST_COMMIT_MESSAGE" value="Increased range of responses" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$PROJECT_DIR$/lib/jlfgr-1_0.jar!/toolbarButtonGraphics/general/Delete16.gif">
@@ -833,8 +838,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Tab4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="183" column="107" selection-start-line="183" selection-start-column="107" selection-end-line="183" selection-end-column="107" />
+        <state relative-caret-position="346">
+          <caret line="188" column="34" selection-start-line="188" selection-start-column="34" selection-end-line="188" selection-end-column="34" />
         </state>
       </provider>
     </entry>

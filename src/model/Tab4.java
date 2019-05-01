@@ -185,6 +185,8 @@ public class Tab4 implements Observer {
         } else if (userInput.contains("age")
                 || userInput.contains("how old")) {
             coachResponse("I'm old enough to be your coach!");
+        } else if (userInput.contains("where")) {
+            coachResponse("Canada.");
         } else if (userInput.contains("how are you")
                 || userInput.contains("whats up")
                 || userInput.contains("hows it going")
