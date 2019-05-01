@@ -179,6 +179,12 @@ public class Tab4 implements Observer {
                 || userInput.contains("trying to")
                 || userInput.contains("try to")) {
             coachResponse("Where there's a will, there's a way! Eat less sugar. You're sweet enough already!");
+        } else if (userInput.contains("name")
+                || userInput.contains("who")) {
+            coachResponse("Who I am doesn't matter. What matters is who you are. Never forget that you are a champion!");
+        } else if (userInput.contains("age")
+                || userInput.contains("how old")) {
+            coachResponse("I'm old enough to be your coach!");
         } else if (userInput.contains("how are you")
                 || userInput.contains("whats up")
                 || userInput.contains("hows it going")
