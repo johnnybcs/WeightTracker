@@ -1,6 +1,8 @@
 # WeightTracker
 <B>Purpose:</B> This app helps you lose weight.
 
+<B>Technologies Used:</B> Java and JavaFX
+
 <B>Instructions:</B>
 1. Move the slider to select your weight goal
 2. Enter your weight on a monthly basis using the text box or spinner
